@@ -1,16 +1,15 @@
 {
-  "private": true,
-  "displayName": "Plugin Name",
-  "name": "homebridge-plugin-name",
+  "displayName": "Homebridge embedded Zigbee2MQTT",
+  "name": "homebridge-zigbee2mqtt-embedded",
   "version": "1.0.0",
-  "description": "A short description about what your plugin does.",
+  "description": "Runs zigbee2mqtt as Homebridge addon.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "git://github.com/kevinkub/homebridge-zigbee2mqtt.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/kevinkub/homebridge-zigbee2mqtt/issues"
   },
   "engines": {
     "node": ">=10.17.0",
@@ -26,7 +25,10 @@
   "keywords": [
     "homebridge-plugin"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "flat": "^5.0.2",
+    "zigbee2mqtt": "^1.18.0"
+  },
   "devDependencies": {
     "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
