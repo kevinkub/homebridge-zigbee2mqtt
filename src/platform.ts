@@ -1,5 +1,4 @@
 import { API, IndependentPlatformPlugin, Logging, APIEvent, PlatformConfig } from 'homebridge';
-import Z2MController = require('zigbee2mqtt/lib/controller');
 import flatten = require('flat');
 import * as fs from 'fs';
 import path = require('path');
@@ -37,8 +36,7 @@ export class Zigbee2MQTTEmbeddedHomebridgePlatform implements IndependentPlatfor
     this.log('Starting Zigbee2MQTT.');
     // Config
     const configFile = path.join(this.api.user.persistPath(), 'configuration.yaml');
-    fs.writeFile(configFile, 'advanced:\n  network_key: GENERATE', { flag: 'wx' }, (err) => {
-      this.log(err?.message || '');
+    fs.writeFile(configFile, 'advanced:\n  network_key: GENERATE\n  log_output:\n    - console', { flag: 'wx' }, (err) => {
       if (!err) {
         this.log('Created initial configuration.yaml file for Zigbee2MQTT.');
       }
@@ -49,6 +47,9 @@ export class Zigbee2MQTTEmbeddedHomebridgePlatform implements IndependentPlatfor
     Object.keys(config).forEach(key => {
       process.env['ZIGBEE2MQTT_CONFIG_' + (key.toUpperCase())] = config[key];
     });
+    // Also hacky, but again - no other way without changes in z2m
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const Z2MController = require('zigbee2mqtt/lib/controller');
     // Start
     this.controller = new Z2MController(this.restartServer.bind(this), this.stopServer.bind(this));
     this.controller.start().then(() => {

@@ -1,7 +1,7 @@
 {
   "displayName": "Homebridge embedded Zigbee2MQTT",
   "name": "homebridge-zigbee2mqtt-embedded",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Runs zigbee2mqtt as Homebridge addon.",
   "license": "Apache-2.0",
   "repository": {
@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "flat": "^5.0.2",
+    "import-lazy": "^2.1.0",
     "zigbee2mqtt": "^1.18.0"
   },
   "devDependencies": {

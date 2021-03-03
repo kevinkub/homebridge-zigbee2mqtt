@@ -34,8 +34,7 @@
             "type": "number",
             "title": "Keepalive",
             "requiresRestart": true,
-            "description": "MQTT keepalive in second",
-            "default": 60
+            "description": "MQTT keepalive in second"
           },
           "ca": {
             "type": "string",
@@ -83,29 +82,25 @@
             "type": "boolean",
             "title": "Reject unauthorized",
             "requiresRestart": true,
-            "description": "Disable self-signed SSL certificate",
-            "default": true
+            "description": "Disable self-signed SSL certificate"
           },
           "include_device_information": {
             "type": "boolean",
             "title": "Include device information",
-            "description": "Include device information to mqtt messages",
-            "default": false
+            "description": "Include device information to mqtt messages"
           },
           "version": {
             "type": ["number", "null"],
             "title": "Version",
             "requiresRestart": true,
             "description": "MQTT protocol version",
-            "default": 4,
             "examples": [4, 5]
           },
           "force_disable_retain": {
             "type": "boolean",
             "title": "Force disable retain",
             "requiresRestart": true,
-            "description": "Disable retain for all send messages. ONLY enable if you MQTT broker doesn't support retained message (e.g. AWS IoT core, Azure IoT Hub, Google Cloud IoT core, IBM Watson IoT Platform). Enabling will break the Home Assistant integration",
-            "default": false
+            "description": "Disable retain for all send messages. ONLY enable if you MQTT broker doesn't support retained message (e.g. AWS IoT core, Azure IoT Hub, Google Cloud IoT core, IBM Watson IoT Platform). Enabling will break the Home Assistant integration"
           }
         },
         "required": ["base_topic", "server"]
@@ -125,8 +120,7 @@
             "type": "boolean",
             "title": "Disable led",
             "requiresRestart": true,
-            "description": "Disable LED of the adapter if supported",
-            "default": false
+            "description": "Disable LED of the adapter if supported"
           },
           "adapter": {
             "type": ["string", "null"],
@@ -163,7 +157,6 @@
             "type": "number",
             "minimum": 11,
             "maximum": 26,
-            "default": 11,
             "title": "ZigBee channel",
             "requiresRestart": true,
             "description": "Zigbee channel, changing requires repairing all devices! (Note: use a ZLL channel: 11, 15, 20, or 25 to avoid Problems)",
@@ -172,59 +165,23 @@
           "cache_state": {
             "type": "boolean",
             "title": "Cache state",
-            "description": "MQTT message payload will contain all attributes, not only changed ones. Has to be true when integrating via Home Assistant",
-            "default": true
+            "description": "MQTT message payload will contain all attributes, not only changed ones. Has to be true when integrating via Home Assistant"
           },
           "cache_state_persistent": {
             "type": "boolean",
             "title": "Persist cache state",
-            "description": "Persist cached state, only used when cache_state: true",
-            "default": true
+            "description": "Persist cached state, only used when cache_state: true"
           },
           "cache_state_send_on_startup": {
             "type": "boolean",
             "title": "Send cached state on startup",
-            "description": "Send cached state on startup, only used when cache_state: true",
-            "default": true
-          },
-          "log_rotation": {
-            "type": "boolean",
-            "title": "Log rotation",
-            "requiresRestart": true,
-            "description": "Log rotation",
-            "default": true
+            "description": "Send cached state on startup, only used when cache_state: true"
           },
           "log_level": {
             "type": "string",
             "enum": ["info", "warn", "error", "debug"],
             "title": "Log level",
-            "description": "Logging level",
-            "default": "info"
-          },
-          "log_output": {
-            "type": "array",
-            "requiresRestart": true,
-            "items": {
-              "type": "string",
-              "enum": ["console", "file", "syslog"]
-            },
-            "title": "Log output",
-            "description": "Output location of the log, leave empty to supress logging"
-          },
-          "log_directory": {
-            "type": "string",
-            "title": "Log directory",
-            "requiresRestart": true,
-            "description": "Location of log directory",
-            "examples": ["data/log/%TIMESTAMP%"]
-          },
-          "log_file": {
-            "type": "string",
-            "title": "Log file",
-            "requiresRestart": true,
-            "description": "Log file name, can also contain timestamp",
-            "examples": ["zigbee2mqtt_%TIMESTAMP%.log"],
-            "default": "log.txt"
+            "description": "Logging level"
           },
           "baudrate": {
             "type": "number",
@@ -251,19 +208,16 @@
             "type": "string",
             "enum": ["disable", "ISO_8601", "ISO_8601_local", "epoch"],
             "title": "Last seen",
-            "description": "Add a last_seen attribute to MQTT messages, contains date/time of last Zigbee message",
-            "default": "disable"
+            "description": "Add a last_seen attribute to MQTT messages, contains date/time of last Zigbee message"
           },
           "elapsed": {
             "type": "boolean",
             "title": "Elapsed",
-            "description": "Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg",
-            "default": false
+            "description": "Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg"
           },
           "availability_timeout": {
             "type": "number",
             "minimum": 0,
-            "default": 0,
             "requiresRestart": true,
             "title": "Availability Timeout",
             "description": "Availability timeout in seconds when enabled, devices will be checked if they are still online. Only AC powered routers are checked for availability"
@@ -311,77 +265,6 @@
             "requiresRestart": true,
             "title": "Adapter delay",
             "description": "Adapter delay"
-          },
-          "log_syslog": {
-            "type": "object",
-            "title": "syslog",
-            "properties": {
-              "host": {
-                "type": "string",
-                "title": "Host",
-                "description": "The host running syslogd, defaults to localhost.",
-                "default": "localhost"
-              },
-              "port": {
-                "type": "number",
-                "title": "Port",
-                "description": "The port on the host that syslog is running on, defaults to syslogd's default port.",
-                "default": 123
-              },
-              "protocol": {
-                "type": "string",
-                "title": "Protocol",
-                "description": "The network protocol to log over (e.g. tcp4, udp4, tls4, unix, unix-connect, etc).",
-                "default": "tcp4",
-                "examples": [
-                  "tcp4",
-                  "udp4",
-                  "tls4",
-                  "unix",
-                  "unix-connect"
-                ]
-              },
-              "path": {
-                "type": "string",
-                "title": "Path",
-                "description": "The path to the syslog dgram socket (i.e. /dev/log or /var/run/syslog for OS X).",
-                "default": "/dev/log",
-                "examples": [
-                  "/dev/log",
-                  "/var/run/syslog"
-                ]
-              },
-              "pid": {
-                "type": "string",
-                "title": "PID",
-                "description": "PID of the process that log messages are coming from (Default process.pid).",
-                "default": "process.pid"
-              },
-              "localhost": {
-                "type": "string",
-                "title": "Localhost",
-                "description": "Host to indicate that log messages are coming from (Default: localhost).",
-                "default": "localhost"
-              },
-              "type": {
-                "type": "string",
-                "title": "Type",
-                "description": "The type of the syslog protocol to use (Default: BSD, also valid: 5424).",
-                "default": "5424"
-              },
-              "app_name": {
-                "type": "string",
-                "title": "Localhost",
-                "description": "The name of the application (Default: Zigbee2MQTT).",
-                "default": "Zigbee2MQTT"
-              },
-              "eol": {
-                "type": "string",
-                "title": "eol",
-                "description": "The end of line character to be added to the end of the message (Default: Message without modifications).",
-                "default": "/n"
-              }
-            }
           }
         }
       },
@@ -392,14 +275,12 @@
           "update_check_interval": {
             "type": "number",
             "title": "Update check interval",
-            "description": "Your device may request a check for a new firmware update. This value determines how frequently third party servers may actually be contacted to look for firmware updates. The value is set in minutes, and the default is 10.",
-            "default": 10
+            "description": "Your device may request a check for a new firmware update. This value determines how frequently third party servers may actually be contacted to look for firmware updates. The value is set in minutes, and the default is 10."
           },
           "disable_automatic_update_check": {
             "type": "boolean",
             "title": "Disable automatic update check",
-            "description": "Zigbee devices may request a firmware update, and do so frequently, causing Zigbee2MQTT to reach out to third party servers. If you disable these device initiated checks, you can still initiate a firmware update check manually.",
-            "default": false
+            "description": "Zigbee devices may request a firmware update, and do so frequently, causing Zigbee2MQTT to reach out to third party servers. If you disable these device initiated checks, you can still initiate a firmware update check manually."
           }
         }
       },
@@ -418,7 +299,7 @@
             "type": "string",
             "title": "Bind host",
             "description": "Frontend binding host",
-            "default":" 0.0.0.0",
+            "default": "0.0.0.0",
             "requiresRestart": true
           },
           "auth_token": {
