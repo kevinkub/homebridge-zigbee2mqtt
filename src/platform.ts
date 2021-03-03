@@ -36,11 +36,12 @@ export class Zigbee2MQTTEmbeddedHomebridgePlatform implements IndependentPlatfor
     this.log('Starting Zigbee2MQTT.');
     // Config
     const configFile = path.join(this.api.user.persistPath(), 'configuration.yaml');
-    fs.writeFile(configFile, 'advanced:\n  network_key: GENERATE\n  log_output:\n    - console', { flag: 'wx' }, (err) => {
-      if (!err) {
-        this.log('Created initial configuration.yaml file for Zigbee2MQTT.');
-      }
-    });
+    try {
+      fs.writeFileSync(configFile, 'advanced:\n  network_key: GENERATE\n  log_output:\n    - console', { flag: 'wx' });
+      this.log('Created initial configuration.yaml file for Zigbee2MQTT.');
+    } catch (error) {
+      // file already exists 
+    }
     // Hacky, I know, but there is no other way at the moment.
     process.env['ZIGBEE2MQTT_DATA'] = this.api.user.persistPath();
     const config = flatten(this.config, {delimiter: '_'});
